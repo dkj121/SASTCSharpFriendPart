@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SASTCSharpFriendPart.UI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SASTCSharpFriendPart.UI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
