@@ -1,10 +1,11 @@
 using Microsoft.UI.Xaml.Controls;
+
 using SASTCSharpFriendPart_UI.ViewModels;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace SASTCSharpFriendPart_UI;
+namespace SASTCSharpFriendPart_UI.Views;
 
 /// <summary>
 /// The main content page displayed inside the application window.
