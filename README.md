@@ -32,10 +32,17 @@
 ```txt
 
 SASTCsharpFriendPart
-├─📂SASTCSharpFriendPart.Core // 业务代码
-└─📂SASTCSharpFriendPart.UI   // UI 代码
-    ├─📂Assets
-    ├─📂Properties
-    └─📂ViewModels
+├─SASTCSharpFriendPart.slnx  // 解决方案
+├─📂SASTCSharpFriendPart.Core  // 业务代码
+│  ├─📂Data                    // 基础数据
+│  ├─📂Models
+│  └─📂Service
+└─📂SASTCSharpFriendPart.UI
+   ├─📂Assets
+   ├─📂Controls               // 传说中一呼百应的大按钮！
+   ├─📂Properties             // 一些项目配置文件
+   ├─📂Services               // 一些常用方法
+   ├─📂ViewModels
+   └─📂Views
 
 ```
