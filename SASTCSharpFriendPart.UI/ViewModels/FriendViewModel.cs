@@ -1,5 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using SASTCSharpFriendPart.Core.Models;
 using System.Collections.ObjectModel;
 using System.Text.Json;
@@ -28,6 +31,32 @@ public partial class FriendViewModel : ObservableObject
     [ObservableProperty]
     private bool isEditing;
 
+    /// <summary>Inverse of IsEditing — used directly by {x:Bind} for IsReadOnly.</summary>
+    public bool IsNotEditing => !IsEditing;
+
+    /// <summary>Edit button visible when a friend is selected and NOT editing.</summary>
+    public Visibility EditButtonVisible =>
+        !string.IsNullOrEmpty(SelectedFriendName) && !IsEditing
+            ? Visibility.Visible : Visibility.Collapsed;
+
+    /// <summary>Image source derived from ImagePath with path-traversal guard.</summary>
+    public ImageSource? FriendImage
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(ImagePath)) return null;
+            try
+            {
+                string fullPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, ImagePath));
+                string baseDir = Path.GetFullPath(AppContext.BaseDirectory);
+                if (!fullPath.StartsWith(baseDir + Path.DirectorySeparatorChar) || !File.Exists(fullPath))
+                    return null;
+                return new BitmapImage(new Uri(fullPath));
+            }
+            catch { return null; }
+        }
+    }
+
     public FriendViewModel()
     {
         LoadFriends();
@@ -38,15 +67,13 @@ public partial class FriendViewModel : ObservableObject
         try
         {
             string jsonPath = Path.Combine(AppContext.BaseDirectory, "Data", "data.json");
-            if (!File.Exists(jsonPath))
-                return;
+            if (!File.Exists(jsonPath)) return;
 
             string jsonData = File.ReadAllText(jsonPath);
             _friends = JsonSerializer.Deserialize<List<FriendDto>>(jsonData) ?? new();
 
             FriendNames.Clear();
-            foreach (var friend in _friends)
-                FriendNames.Add(friend.Name);
+            foreach (var f in _friends) FriendNames.Add(f.Name);
 
             if (FriendNames.Count > 0)
                 SelectedFriendName = FriendNames[0];
@@ -68,10 +95,18 @@ public partial class FriendViewModel : ObservableObject
         FriendDescription = friend.Description;
         IsEditing = false;
 
-        string imagePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, friend.ImgUrl));
+        string path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, friend.ImgUrl));
         string baseDir = Path.GetFullPath(AppContext.BaseDirectory);
-        ImagePath = (imagePath.StartsWith(baseDir + Path.DirectorySeparatorChar) && File.Exists(imagePath))
-            ? imagePath : string.Empty;
+        ImagePath = (path.StartsWith(baseDir + Path.DirectorySeparatorChar) && File.Exists(path))
+            ? path : string.Empty;
+
+        OnPropertyChanged(nameof(EditButtonVisible));
+    }
+
+    partial void OnIsEditingChanged(bool value)
+    {
+        OnPropertyChanged(nameof(IsNotEditing));
+        OnPropertyChanged(nameof(EditButtonVisible));
     }
 
     [RelayCommand]

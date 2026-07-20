@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SASTCSharpFriendPart_UI.Views"
     xmlns:vm="using:SASTCSharpFriendPart_UI.ViewModels"
-    Title="Friend Management System"
-    ExtendsContentIntoTitleBar="True">
+    Title="Friend Management System">
     <Window.SystemBackdrop>
         <MicaBackdrop/>
     </Window.SystemBackdrop>

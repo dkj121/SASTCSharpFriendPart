@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <UserControl
     x:Class="SASTCSharpFriendPart_UI.Controls.LargeButton"
+    x:Name="Root"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
@@ -27,7 +28,7 @@
                         Grid.Column="0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
-                        Content="{x:Bind Icon, Mode=OneWay}"/>
+                        Content="{Binding Icon, ElementName=Root}"/>
 
                     <StackPanel
                         Grid.Column="1"
@@ -37,10 +38,10 @@
                         <TextBlock
                             x:Name="TitleText"
                             Style="{ThemeResource BodyStrongTextBlockStyle}"
-                            Text="{x:Bind MainTitle, Mode=OneWay}"/>
+                            Text="{Binding MainTitle, ElementName=Root}"/>
                         <TextBlock
                             Style="{ThemeResource CaptionTextBlockStyle}"
-                            Text="{x:Bind SubTitle, Mode=OneWay}"
+                            Text="{Binding SubTitle, ElementName=Root}"
                             Opacity="0.85"/>
                     </StackPanel>
                 </Grid>

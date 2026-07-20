@@ -59,13 +59,13 @@
                                 PlaceholderText="Friend Name"
                                 HorizontalAlignment="Stretch"
                                 Margin="12,6,24,6"
-                                IsReadOnly="{x:Bind FriendPage.InvertBool(ViewModel.IsEditing), Mode=OneWay}"
+                                IsReadOnly="{x:Bind ViewModel.IsNotEditing, Mode=OneWay}"
                                 Text="{x:Bind ViewModel.FriendName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox
                                 PlaceholderText="Friend Description"
                                 HorizontalAlignment="Stretch"
                                 Margin="12,6,24,6"
-                                IsReadOnly="{x:Bind FriendPage.InvertBool(ViewModel.IsEditing), Mode=OneWay}"
+                                IsReadOnly="{x:Bind ViewModel.IsNotEditing, Mode=OneWay}"
                                 Text="{x:Bind ViewModel.FriendDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
@@ -85,7 +85,7 @@
                                 Margin="6,6,6,6"
                                 Width="80"
                                 HorizontalAlignment="Left"
-                                Visibility="{x:Bind FriendPage.EditButtonVisible(ViewModel.SelectedFriendName, ViewModel.IsEditing), Mode=OneWay}"
+                                Visibility="{x:Bind ViewModel.EditButtonVisible, Mode=OneWay}"
                                 Command="{x:Bind ViewModel.EditCommand}"
                                 Content="    Edit"/>
                             <ComboBox
@@ -105,7 +105,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    Source="{x:Bind FriendPage.GetImageSource(ViewModel.ImagePath), Mode=OneWay}"/>
+                    Source="{x:Bind ViewModel.FriendImage, Mode=OneWay}"/>
             </Grid>
         </Border>
     </Grid>
