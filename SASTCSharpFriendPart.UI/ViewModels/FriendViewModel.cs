@@ -1,9 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
+
 using SASTCSharpFriendPart.Core.Models;
+
 using System.Collections.ObjectModel;
 using System.Text.Json;
 
@@ -87,7 +90,10 @@ public partial class FriendViewModel : ObservableObject
         FriendName = friend.Name;
         FriendDescription = friend.Description;
         IsEditing = false;
-        ImagePath = friend.ImgUrl?.Contains("..") != true ? friend.ImgUrl : string.Empty;
+        var fullPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, friend.ImgUrl));
+        var baseDir = Path.GetFullPath(AppContext.BaseDirectory);
+        ImagePath = fullPath.StartsWith(baseDir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)
+            ? friend.ImgUrl : string.Empty;
 
         OnPropertyChanged(nameof(EditButtonVisible));
     }
