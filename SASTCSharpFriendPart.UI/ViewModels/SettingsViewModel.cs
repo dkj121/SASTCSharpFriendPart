@@ -8,6 +8,8 @@ namespace SASTCSharpFriendPart_UI.ViewModels;
 
 public partial class SettingsViewModel : ObservableObject
 {
+    private bool _initializing;
+
     [ObservableProperty]
     private ObservableCollection<string> themes = new() { "明亮", "黑暗", "跟随系统设置", "亚克力" };
 
@@ -18,6 +20,8 @@ public partial class SettingsViewModel : ObservableObject
 
     public SettingsViewModel()
     {
+        _initializing = true;
+
         if (ThemeService.IsAcrylicMode)
             SelectedTheme = "亚克力";
         else
@@ -28,12 +32,16 @@ public partial class SettingsViewModel : ObservableObject
                 _ => "跟随系统设置"
             };
 
+        _initializing = false;
+
         HelpCommand = new RelayCommand(() =>
             NavigationService.Navigate(typeof(Views.MoreInfoPage)));
     }
 
     partial void OnSelectedThemeChanged(string value)
     {
+        if (_initializing) return;
+
         switch (value)
         {
             case "黑暗":

@@ -31,28 +31,21 @@ public partial class FriendViewModel : ObservableObject
     [ObservableProperty]
     private bool isEditing;
 
-    /// <summary>Inverse of IsEditing — used directly by {x:Bind} for IsReadOnly.</summary>
     public bool IsNotEditing => !IsEditing;
 
-    /// <summary>Edit button visible when a friend is selected and NOT editing.</summary>
     public Visibility EditButtonVisible =>
         !string.IsNullOrEmpty(SelectedFriendName) && !IsEditing
             ? Visibility.Visible : Visibility.Collapsed;
 
-    /// <summary>Image source derived from ImagePath with path-traversal guard.</summary>
+    public Visibility SaveButtonVisible =>
+        IsEditing ? Visibility.Visible : Visibility.Collapsed;
+
     public ImageSource? FriendImage
     {
         get
         {
             if (string.IsNullOrEmpty(ImagePath)) return null;
-            try
-            {
-                string fullPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, ImagePath));
-                string baseDir = Path.GetFullPath(AppContext.BaseDirectory);
-                if (!fullPath.StartsWith(baseDir + Path.DirectorySeparatorChar) || !File.Exists(fullPath))
-                    return null;
-                return new BitmapImage(new Uri(fullPath));
-            }
+            try { return new BitmapImage(new Uri($"ms-appx:///{ImagePath}")); }
             catch { return null; }
         }
     }
@@ -94,13 +87,14 @@ public partial class FriendViewModel : ObservableObject
         FriendName = friend.Name;
         FriendDescription = friend.Description;
         IsEditing = false;
-
-        string path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, friend.ImgUrl));
-        string baseDir = Path.GetFullPath(AppContext.BaseDirectory);
-        ImagePath = (path.StartsWith(baseDir + Path.DirectorySeparatorChar) && File.Exists(path))
-            ? path : string.Empty;
+        ImagePath = friend.ImgUrl;
 
         OnPropertyChanged(nameof(EditButtonVisible));
+    }
+
+    partial void OnImagePathChanged(string value)
+    {
+        OnPropertyChanged(nameof(FriendImage));
     }
 
     partial void OnIsEditingChanged(bool value)
@@ -109,10 +103,6 @@ public partial class FriendViewModel : ObservableObject
         OnPropertyChanged(nameof(EditButtonVisible));
         OnPropertyChanged(nameof(SaveButtonVisible));
     }
-
-    /// <summary>Save button visible only while editing.</summary>
-    public Visibility SaveButtonVisible =>
-        IsEditing ? Visibility.Visible : Visibility.Collapsed;
 
     [RelayCommand]
     private void Edit()

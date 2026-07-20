@@ -37,7 +37,7 @@ public static class ThemeService
         }
         set
         {
-            if (Application.Current is App app)
+            if (Application.Current is App app && value != ElementTheme.Default)
             {
                 app.RequestedTheme = value switch
                 {
@@ -88,6 +88,11 @@ public static class ThemeService
         IsAcrylicMode = false;
         SaveAcrylicModeSetting(false);
         RootTheme = theme;
+
+        // Also set the window content theme for immediate visual change
+        if (AppWindow?.Content is FrameworkElement fe)
+            fe.RequestedTheme = theme;
+
         OnThemeChanged?.Invoke();
     }
 
@@ -96,6 +101,10 @@ public static class ThemeService
         IsAcrylicMode = true;
         SaveAcrylicModeSetting(true);
         // Acrylic mode follows system theme; leave app.RequestedTheme unchanged.
+
+        if (AppWindow?.Content is FrameworkElement fe)
+            fe.RequestedTheme = ElementTheme.Default;
+
         OnThemeChanged?.Invoke();
     }
 
