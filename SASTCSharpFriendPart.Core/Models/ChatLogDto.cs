@@ -1,0 +1,1 @@
+namespace SASTCSharpFriendPart.Core.Models;
