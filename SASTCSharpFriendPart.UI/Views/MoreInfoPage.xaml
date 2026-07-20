@@ -67,13 +67,13 @@
                 <!-- QR code images -->
                 <StackPanel Orientation="Horizontal">
                     <Image
-                        Source="Assets/dotnet.png"
+                        Source="ms-appx:///Assets/dotnet.png"
                         HorizontalAlignment="Left"
                         Margin="10,50"
                         Height="400"
                         Width="300"/>
                     <Image
-                        Source="Assets/qrcode_1784464242477.jpg"
+                        Source="ms-appx:///Assets/qrcode_1784464242477.jpg"
                         HorizontalAlignment="Left"
                         Margin="10,50"
                         Height="600"

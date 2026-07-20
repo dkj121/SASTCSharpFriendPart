@@ -82,7 +82,7 @@
             Margin="0,0,-130,-246"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Source="Assets/home-hero.png"
+            Source="ms-appx:///Assets/home-hero.png"
             Opacity="0">
             <Image.RenderTransform>
                 <TranslateTransform x:Name="HeroImageTranslate" X="52.8" Y="488"/>
@@ -125,7 +125,7 @@
                 Margin="56,-76,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Source="Assets/C_Sharp_Logo_2023.svg.png"
+                Source="ms-appx:///Assets/C_Sharp_Logo_2023.svg.png"
                 Opacity="0"/>
 
             <!-- Subtitle text -->

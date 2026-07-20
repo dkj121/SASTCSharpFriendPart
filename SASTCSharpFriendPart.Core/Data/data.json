@@ -3,24 +3,24 @@
     "Id": 1,
     "Name": "Serval",
     "Description": "A kind of cat",
-    "ImgUrl": "Assets/Serval.png"
+    "ImgUrl": "Data/Serval.png"
   },
   {
     "Id": 2,
     "Name": "Fennec",
     "Description": "A kind of fox",
-    "ImgUrl": "Assets/Fennec.png"
+    "ImgUrl": "Data/Fennec.png"
   },
   {
     "Id": 3,
     "Name": "Egret",
     "Description": "A kind of bird",
-    "ImgUrl": "Assets/Egret.jpg"
+    "ImgUrl": "Data/Egret.jpg"
   },
   {
     "Id": 4,
     "Name": "Black Manba",
     "Description": "A kind of snake",
-    "ImgUrl": "Assets/Black mamba.png"
+    "ImgUrl": "Data/Black mamba.png"
   }
 ]

@@ -30,7 +30,7 @@
                     Width="16"
                     Height="16"
                     VerticalAlignment="Center"
-                    Source="Assets/StoreLogo.scale-200.png"/>
+                    Source="ms-appx:///Assets/StoreLogo.scale-200.png"/>
                 <TextBlock
                     x:Name="TitleTextBlock"
                     Margin="0,0,0,2"

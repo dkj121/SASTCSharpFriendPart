@@ -56,6 +56,14 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
 
+  <!-- Copy Core/Data content to output so FriendViewModel can load images -->
+  <Target Name="CopyCoreData" AfterTargets="Build">
+    <ItemGroup>
+      <CoreDataFiles Include="..\SASTCSharpFriendPart.Core\Data\**\*" Exclude="..\SASTCSharpFriendPart.Core\Data\*.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CoreDataFiles)" DestinationFolder="$(OutputPath)\Data" SkipUnchangedFiles="true" />
+  </Target>
+
   <!-- Publish Properties -->
   <PropertyGroup>
     <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
