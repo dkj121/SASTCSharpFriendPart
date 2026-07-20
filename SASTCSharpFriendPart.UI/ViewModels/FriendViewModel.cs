@@ -87,7 +87,7 @@ public partial class FriendViewModel : ObservableObject
         FriendName = friend.Name;
         FriendDescription = friend.Description;
         IsEditing = false;
-        ImagePath = friend.ImgUrl;
+        ImagePath = friend.ImgUrl?.Contains("..") != true ? friend.ImgUrl : string.Empty;
 
         OnPropertyChanged(nameof(EditButtonVisible));
     }
