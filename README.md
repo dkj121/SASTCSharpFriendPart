@@ -1,6 +1,6 @@
 # SASTCsharpFriendPart
 
-TODO：配图  
+![img](/SASTCSharpFriendPart.UI/Assets/image.png)
 这里有一群可爱的动物小伙伴~  
 目前这个项目还是仅仅只有最基本的登录/注册界面，我们希望你能够为当前的桌面端 APP 添加供小动物们沟通交流的交流界面。（参考 朋友圈、QQ 空间、微博、Twitter（现 X ）、Discard 等均可）  
 目前这个项目采用的是 WinUI3 框架，对于 MacOS 或者 Linux用户来说不够友好，如果需要，你也可以选择其他框架如 .NET MAUI、React Native、Electron、Avalonia 等均可  
