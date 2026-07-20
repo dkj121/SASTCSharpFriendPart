@@ -107,11 +107,52 @@ public partial class FriendViewModel : ObservableObject
     {
         OnPropertyChanged(nameof(IsNotEditing));
         OnPropertyChanged(nameof(EditButtonVisible));
+        OnPropertyChanged(nameof(SaveButtonVisible));
     }
+
+    /// <summary>Save button visible only while editing.</summary>
+    public Visibility SaveButtonVisible =>
+        IsEditing ? Visibility.Visible : Visibility.Collapsed;
 
     [RelayCommand]
     private void Edit()
     {
         IsEditing = true;
+    }
+
+    [RelayCommand]
+    private void Save()
+    {
+        var friend = _friends.FirstOrDefault(f => f.Name == SelectedFriendName);
+        if (friend != null)
+        {
+            friend.Name = FriendName;
+            friend.Description = FriendDescription;
+        }
+
+        WriteFriendsToJson();
+
+        if (FriendName != SelectedFriendName)
+        {
+            var idx = FriendNames.IndexOf(SelectedFriendName);
+            FriendNames[idx] = FriendName;
+            SelectedFriendName = FriendName;
+        }
+
+        IsEditing = false;
+    }
+
+    private void WriteFriendsToJson()
+    {
+        try
+        {
+            string jsonPath = Path.Combine(AppContext.BaseDirectory, "Data", "data.json");
+            var json = JsonSerializer.Serialize(_friends, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(jsonPath, json);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error saving friends: {ex.Message}");
+        }
     }
 }

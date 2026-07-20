@@ -11,7 +11,9 @@
             <DoubleAnimation
                 Storyboard.TargetName="MainBorder"
                 Storyboard.TargetProperty="Opacity"
-                From="0" To="1" Duration="0:0:0.6"/>
+                From="0"
+                To="1"
+                Duration="0:0:0.6"/>
         </Storyboard>
     </Page.Resources>
 
@@ -36,7 +38,8 @@
 
                 <!-- Left panel -->
                 <Grid Grid.Column="0"
-                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
@@ -87,7 +90,15 @@
                                 HorizontalAlignment="Left"
                                 Visibility="{x:Bind ViewModel.EditButtonVisible, Mode=OneWay}"
                                 Command="{x:Bind ViewModel.EditCommand}"
-                                Content="    Edit"/>
+                                Content="Edit"/>
+                            <Button
+                                VerticalAlignment="Top"
+                                Margin="6,6,6,6"
+                                Width="80"
+                                HorizontalAlignment="Left"
+                                Visibility="{x:Bind ViewModel.SaveButtonVisible, Mode=OneWay}"
+                                Command="{x:Bind ViewModel.SaveCommand}"
+                                Content="Save"/>
                             <ComboBox
                                 Grid.Column="1"
                                 Margin="6,6,6,6"
