@@ -1,20 +1,41 @@
 using Microsoft.UI.Xaml;
+
 using System.Text.Json;
 
 namespace SASTCSharpFriendPart_UI.Services;
 
+/// <summary>
+/// ThemeService 提供了一个静态类，用于管理应用程序的主题设置，包括浅色主题、深色主题和亚克力模式。
+/// </summary>
 public static class ThemeService
 {
+    /// <summary>
+    /// SelectedAppThemeKey 是用于存储和检索用户选择的应用程序主题的键。
+    /// </summary>
     private const string SelectedAppThemeKey = "SelectedAppTheme";
+
+    /// <summary>
+    /// IsAcrylicModeKey 是用于存储和检索用户是否启用亚克力模式的键。
+    /// </summary>
     private const string IsAcrylicModeKey = "IsAcrylicMode";
 
+    /// <summary>
+    /// SettingsPath 是用于存储应用程序设置的 JSON 文件的路径，包括主题设置和亚克力模式设置。
+    /// </summary>
     private static readonly string SettingsPath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "SASTCSharpFriendPart",
         "settings.json"
     );
 
+    /// <summary>
+    /// AppWindow 属性用于获取或设置应用程序的主窗口，以便在主题更改时更新窗口内容的主题。
+    /// </summary>
     public static Window? AppWindow { get; set; }
+
+    /// <summary>
+    /// IsAcrylicMode 属性用于指示当前应用程序是否处于亚克力模式。
+    /// </summary>
     public static bool IsAcrylicMode { get; private set; }
 
     /// <summary>
@@ -22,6 +43,9 @@ public static class ThemeService
     /// </summary>
     public static Action? OnThemeChanged { get; set; }
 
+    /// <summary>
+    /// RootTheme 属性用于获取或设置应用程序的根主题（浅色、深色或默认），并在设置更改时保存到配置文件中。
+    /// </summary>
     public static ElementTheme RootTheme
     {
         get
@@ -50,6 +74,9 @@ public static class ThemeService
         }
     }
 
+    /// <summary>
+    /// Initialize 方法用于初始化主题设置，从配置文件中加载用户的主题选择和亚克力模式设置，并应用到应用程序中。
+    /// </summary>
     public static void Initialize()
     {
         string? savedTheme = LoadThemeSetting();
@@ -75,6 +102,10 @@ public static class ThemeService
         }
     }
 
+    /// <summary>
+    /// IsDarkTheme 方法用于检查当前应用程序是否处于深色主题模式，如果根主题为默认，则根据系统主题判断。
+    /// </summary>
+    /// <returns>返回一个布尔值，指示应用程序是否处于深色主题模式</returns>
     public static bool IsDarkTheme()
     {
         var currentTheme = RootTheme;
@@ -83,6 +114,10 @@ public static class ThemeService
         return currentTheme == ElementTheme.Dark;
     }
 
+    /// <summary>
+    /// SetTheme 方法用于设置应用程序的主题为指定的 ElementTheme，并禁用亚克力模式，同时保存设置到配置文件中。
+    /// </summary>
+    /// <param name="theme">主题</param>
     public static void SetTheme(ElementTheme theme)
     {
         IsAcrylicMode = false;
@@ -96,6 +131,9 @@ public static class ThemeService
         OnThemeChanged?.Invoke();
     }
 
+    /// <summary>
+    /// SetAcrylicMode 方法用于启用亚克力模式，同时保存设置到配置文件中。
+    /// </summary>
     public static void SetAcrylicMode()
     {
         IsAcrylicMode = true;
@@ -108,6 +146,10 @@ public static class ThemeService
         OnThemeChanged?.Invoke();
     }
 
+    /// <summary>
+    /// IsSystemDarkTheme 方法用于检查系统当前是否处于深色主题模式，通过读取 Windows 注册表中的主题设置来判断。
+    /// </summary>
+    /// <returns>返回一个布尔值，指示系统是否处于深色主题模式</returns>
     private static bool IsSystemDarkTheme()
     {
         try
@@ -127,16 +169,29 @@ public static class ThemeService
         }
     }
 
+    /// <summary>
+    /// SaveThemeSetting 方法用于将用户选择的应用程序主题保存到配置文件中，以便在应用程序重新启动时恢复该主题设置。
+    /// </summary>
+    /// <param name="theme">主题</param>
     private static void SaveThemeSetting(string theme)
     {
         SaveSetting(SelectedAppThemeKey, theme);
     }
 
+    /// <summary>
+    /// SaveAcrylicModeSetting 方法用于将亚克力模式的设置保存到配置文件中。
+    /// </summary>
+    /// <param name="isAcrylic">指示是否启用亚克力模式的布尔值</param>
     private static void SaveAcrylicModeSetting(bool isAcrylic)
     {
         SaveSetting(IsAcrylicModeKey, isAcrylic);
     }
 
+    /// <summary>
+    /// SaveSetting 方法用于将指定的键值对保存到配置文件中，如果配置文件不存在，则创建该文件。
+    /// </summary>
+    /// <param name="key">储存位置</param>
+    /// <param name="value">储存值</param>
     private static void SaveSetting(string key, object value)
     {
         try
@@ -164,6 +219,10 @@ public static class ThemeService
         }
     }
 
+    /// <summary>
+    /// LoadThemeSetting 方法用于从配置文件中加载用户选择的应用程序主题。
+    /// </summary>
+    /// <returns>返回加载的主题名称，如果未找到则返回 null</returns>
     private static string? LoadThemeSetting()
     {
         var settings = LoadSettings();
@@ -172,6 +231,10 @@ public static class ThemeService
         return null;
     }
 
+    /// <summary>
+    /// LoadAcrylicModeSetting 方法用于从配置文件中加载亚克力模式的设置。
+    /// </summary>
+    /// <returns>返回一个布尔值，指示是否启用了亚克力模式</returns>
     private static bool LoadAcrylicModeSetting()
     {
         var settings = LoadSettings();
@@ -185,6 +248,10 @@ public static class ThemeService
         return false;
     }
 
+    /// <summary>
+    /// LoadSettings 方法用于从配置文件中加载所有的设置，并返回一个包含键值对的字典，如果配置文件不存在或读取失败，则返回 null。
+    /// </summary>
+    /// <returns></returns>
     private static Dictionary<string, object>? LoadSettings()
     {
         try

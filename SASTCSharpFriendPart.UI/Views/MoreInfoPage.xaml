@@ -10,7 +10,7 @@
           Margin="36,40">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                <!-- Reference section -->
+                <!-- 引入内容 -->
                 <StackPanel Margin="0,32,0,24">
                     <TextBlock
                         Text="参考资料"
@@ -40,7 +40,7 @@
                         免试题喵
                     </TextBlock>
 
-                    <!-- Contact info -->
+                    <!-- 联系信息 -->
                     <TextBlock
                         Text="C#组No.35全体成员联系方式"
                         FontSize="24"
@@ -64,7 +64,7 @@
                     </StackPanel>
                 </StackPanel>
 
-                <!-- QR code images -->
+                <!-- 二维码 -->
                 <StackPanel Orientation="Horizontal">
                     <Image
                         Source="ms-appx:///Assets/dotnet.png"

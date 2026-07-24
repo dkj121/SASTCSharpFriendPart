@@ -8,42 +8,57 @@
     Background="Transparent">
 
     <Page.Resources>
-        <!-- Entrance animation storyboards -->
+        <!-- 导入动画 -->
         <Storyboard x:Name="HeroAnimation">
             <DoubleAnimation
                 Storyboard.TargetName="HeroImage"
                 Storyboard.TargetProperty="Opacity"
-                From="0" To="1" Duration="0:0:1.5"/>
+                From="0"
+                To="1"
+                Duration="0:0:1.5"/>
             <DoubleAnimation
                 Storyboard.TargetName="HeroImageTranslate"
                 Storyboard.TargetProperty="X"
-                From="52.8" To="0" Duration="0:0:1.5"/>
+                From="52.8"
+                To="0"
+                Duration="0:0:1.5"/>
             <DoubleAnimation
                 Storyboard.TargetName="HeroImageTranslate"
                 Storyboard.TargetProperty="Y"
-                From="488" To="0" Duration="0:0:1.5"/>
+                From="488"
+                To="0"
+                Duration="0:0:1.5"/>
         </Storyboard>
 
         <Storyboard x:Name="MainTextAnimation">
             <DoubleAnimation
                 Storyboard.TargetName="MainText"
                 Storyboard.TargetProperty="Opacity"
-                From="0" To="1" Duration="0:0:0.8"/>
+                From="0"
+                To="1"
+                Duration="0:0:0.8"/>
             <DoubleAnimation
                 Storyboard.TargetName="MainTextTranslate"
                 Storyboard.TargetProperty="X"
-                From="-1.6" To="0" Duration="0:0:0.8"/>
+                From="-1.6"
+                To="0"
+                Duration="0:0:0.8"/>
             <DoubleAnimation
                 Storyboard.TargetName="MainTextTranslate"
                 Storyboard.TargetProperty="Y"
-                From="72" To="0" Duration="0:0:0.8"/>
+                From="72"
+                To="0"
+                Duration="0:0:0.8"/>
         </Storyboard>
 
         <Storyboard x:Name="LogoAnimation">
             <DoubleAnimation
                 Storyboard.TargetName="Logo"
                 Storyboard.TargetProperty="Opacity"
-                From="0" To="1" BeginTime="0:0:0.3" Duration="0:0:1.1">
+                From="0"
+                To="1"
+                BeginTime="0:0:0.3"
+                Duration="0:0:1.1">
                 <DoubleAnimation.EasingFunction>
                     <BackEase Amplitude="0.3"/>
                 </DoubleAnimation.EasingFunction>
@@ -54,27 +69,39 @@
             <DoubleAnimation
                 Storyboard.TargetName="SubText"
                 Storyboard.TargetProperty="Opacity"
-                From="0" To="1" BeginTime="0:0:0.2" Duration="0:0:0.7"/>
+                From="0"
+                To="1"
+                BeginTime="0:0:0.2"
+                Duration="0:0:0.7"/>
             <DoubleAnimation
                 Storyboard.TargetName="SubTextScale"
                 Storyboard.TargetProperty="ScaleX"
-                From="0.98" To="1" BeginTime="0:0:0.2" Duration="0:0:0.7"/>
+                From="0.98"
+                To="1"
+                BeginTime="0:0:0.2"
+                Duration="0:0:0.7"/>
             <DoubleAnimation
                 Storyboard.TargetName="SubTextScale"
                 Storyboard.TargetProperty="ScaleY"
-                From="0.95" To="1" BeginTime="0:0:0.2" Duration="0:0:0.7"/>
+                From="0.95"
+                To="1"
+                BeginTime="0:0:0.2"
+                Duration="0:0:0.7"/>
         </Storyboard>
 
         <Storyboard x:Name="HelpButtonAnimation">
             <DoubleAnimation
                 Storyboard.TargetName="HelpButton"
                 Storyboard.TargetProperty="Opacity"
-                From="0" To="1" BeginTime="0:0:0.9" Duration="0:0:0.6"/>
+                From="0"
+                To="1"
+                BeginTime="0:0:0.9"
+                Duration="0:0:0.6"/>
         </Storyboard>
     </Page.Resources>
 
     <Grid>
-        <!-- Hero background image -->
+        <!-- 背景图片 -->
         <Image
             x:Name="HeroImage"
             Width="923"
@@ -85,7 +112,9 @@
             Source="ms-appx:///Assets/home-hero.png"
             Opacity="0">
             <Image.RenderTransform>
-                <TranslateTransform x:Name="HeroImageTranslate" X="52.8" Y="488"/>
+                <TranslateTransform x:Name="HeroImageTranslate"
+                                    X="52.8"
+                                    Y="488"/>
             </Image.RenderTransform>
         </Image>
 
@@ -98,7 +127,7 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Center">
 
-            <!-- Main text -->
+            <!-- 主标题 -->
             <TextBlock
                 x:Name="MainText"
                 Width="632"
@@ -109,11 +138,14 @@
                 LineHeight="72"
                 Opacity="0">
                 <TextBlock.RenderTransform>
-                    <TranslateTransform x:Name="MainTextTranslate" X="-1.6" Y="72"/>
+                    <TranslateTransform x:Name="MainTextTranslate"
+                                        X="-1.6"
+                                        Y="72"/>
                 </TextBlock.RenderTransform>
                 <Run Text="Welcome to SAST"/>
                 <LineBreak/>
-                <Run FontWeight="SemiBold" Text="      Group"/>
+                <Run FontWeight="SemiBold"
+                     Text="      Group"/>
                 <Run Text=" !"/>
             </TextBlock>
 
@@ -128,7 +160,7 @@
                 Source="ms-appx:///Assets/C_Sharp_Logo_2023.svg.png"
                 Opacity="0"/>
 
-            <!-- Subtitle text -->
+            <!-- 副标题 -->
             <TextBlock
                 x:Name="SubText"
                 Width="470"
@@ -141,23 +173,29 @@
                 TextWrapping="Wrap"
                 Opacity="0">
                 <TextBlock.RenderTransform>
-                    <ScaleTransform x:Name="SubTextScale" ScaleX="0.98" ScaleY="0.95"/>
+                    <ScaleTransform x:Name="SubTextScale"
+                                    ScaleX="0.98"
+                                    ScaleY="0.95"/>
                 </TextBlock.RenderTransform>
                 <Run Text="恭喜你迈出了你的第一步！"/>
                 <LineBreak/>
                 <Run Text="如果你成功看到此界面，"/>
                 <LineBreak/>
                 <Run Text="你已经"/>
-                <Run FontWeight="Bold" Text="超越90%的人"/>
-                <Run Foreground="Gray" Text="*"/>
+                <Run FontWeight="Bold"
+                     Text="超越90%的人"/>
+                <Run Foreground="Gray"
+                     Text="*"/>
                 <Run Text="了！"/>
                 <LineBreak/>
                 <Run Text="请继续努力！"/>
                 <LineBreak/>
-                <Run FontSize="12" Foreground="Gray" Text="*: 数据来源于22级C#组长"/>
+                <Run FontSize="12"
+                     Foreground="Gray"
+                     Text="*: 数据来源于22级C#组长"/>
             </TextBlock>
 
-            <!-- Help button -->
+            <!-- 帮助按钮 -->
             <controls:LargeButton
                 x:Name="HelpButton"
                 HorizontalAlignment="Left"

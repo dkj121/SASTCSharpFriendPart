@@ -6,6 +6,7 @@
     xmlns:vm="using:SASTCSharpFriendPart_UI.ViewModels"
     Background="Transparent">
 
+    <!-- 加载动画 -->
     <Page.Resources>
         <Storyboard x:Name="EntranceAnimation">
             <DoubleAnimation
@@ -36,7 +37,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Left panel -->
+                <!-- 左侧面板 -->
                 <Grid Grid.Column="0"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch">
@@ -110,7 +111,7 @@
                     </Border>
                 </Grid>
 
-                <!-- Right panel: image -->
+                <!-- 右侧面板: 图片 -->
                 <Image
                     Stretch="UniformToFill"
                     Grid.Column="1"

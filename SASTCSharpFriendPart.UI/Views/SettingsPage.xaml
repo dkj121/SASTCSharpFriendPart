@@ -20,7 +20,7 @@
                                FontSize="18"
                                FontWeight="SemiBold"/>
 
-                    <!-- Theme selector card -->
+                    <!-- 主题选项 -->
                     <Border CornerRadius="8"
                             Padding="16"
                             Margin="0,0,0,8"
@@ -29,11 +29,11 @@
                             Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                         <StackPanel Spacing="8">
                             <StackPanel Orientation="Horizontal"
-                                    Spacing="8"
-                                    VerticalAlignment="Center">
+                                        Spacing="8"
+                                        VerticalAlignment="Center">
                                 <TextBlock Text="🎨"
-                                        FontSize="20"
-                                        VerticalAlignment="Center"/>
+                                           FontSize="20"
+                                           VerticalAlignment="Center"/>
                                 <TextBlock Text="应用主题"
                                            FontSize="16"
                                            FontWeight="SemiBold"/>
@@ -53,7 +53,7 @@
                                FontWeight="SemiBold"
                                Margin="0,16,0,8"/>
 
-                    <!-- Help card -->
+                    <!-- 帮助卡片 -->
                     <Border CornerRadius="8"
                             Padding="16"
                             Margin="0,0,0,8"
@@ -66,11 +66,11 @@
                                 Background="Transparent"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal"
-                                    Spacing="8"
-                                    VerticalAlignment="Center">
+                                        Spacing="8"
+                                        VerticalAlignment="Center">
                                 <TextBlock Text="❔"
-                                        FontSize="20"
-                                        VerticalAlignment="Center"/>
+                                           FontSize="20"
+                                           VerticalAlignment="Center"/>
                                 <StackPanel>
                                     <TextBlock Text="需要帮助？"
                                                FontSize="16"

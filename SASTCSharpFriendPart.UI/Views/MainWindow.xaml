@@ -16,11 +16,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Custom title bar -->
+        <!-- 标题 -->
         <Grid x:Name="AppTitleBar"
-                Grid.Row="0"
-                Height="40"
-                VerticalAlignment="Top">
+              Grid.Row="0"
+              Height="40"
+              VerticalAlignment="Top">
             <StackPanel
                 x:Name="TitleStackPanel"
                 Margin="16,10,0,0"
@@ -40,14 +40,14 @@
             </StackPanel>
         </Grid>
 
-        <!-- Body: sidebar + content -->
+        <!-- 内容区域 -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Sidebar -->
+            <!-- 左侧面板 -->
             <Border Grid.Column="0"
                     BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
                     BorderThickness="0,0,1,0">
@@ -59,7 +59,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0"
-                            Margin="5">
+                                Margin="5">
                         <Button x:Name="WelcomeButton"
                                 Content="🎉 欢迎！"
                                 HorizontalAlignment="Stretch"
@@ -99,9 +99,9 @@
                 </Grid>
             </Border>
 
-            <!-- Content frame -->
+            <!-- 内容框架 -->
             <Frame x:Name="RootFrame"
-                    Grid.Column="1"/>
+                   Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>
