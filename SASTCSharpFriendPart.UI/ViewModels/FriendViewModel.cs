@@ -106,10 +106,7 @@ public partial class FriendViewModel : ObservableObject
         FriendName = friend.Name;
         FriendDescription = friend.Description;
         IsEditing = false;
-        var fullPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, friend.ImgUrl));
-        var baseDir = Path.GetFullPath(AppContext.BaseDirectory);
-        ImagePath = fullPath.StartsWith(baseDir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)
-            ? friend.ImgUrl : string.Empty;
+        ImagePath = friend.ImgUrl;
 
         OnPropertyChanged(nameof(EditButtonVisible));
     }
