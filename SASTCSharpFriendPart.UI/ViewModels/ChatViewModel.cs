@@ -54,18 +54,43 @@ public class ChatContactViewModel
         PreviewTime = Messages.Last().Time;
     }
 
+    /// <summary>
+    /// 用户名
+    /// </summary>
     public string Name { get; }
 
+    /// <summary>
+    /// 简介
+    /// </summary>
     public string Description { get; }
 
+    /// <summary>
+    /// 头像
+    /// </summary>
     public ImageSource? Avatar { get; }
 
+    /// <summary>
+    /// 消息对象
+    /// </summary>
     public IReadOnlyList<ChatMessageViewModel> Messages { get; }
 
+    /// <summary>
+    /// 在对话列表中显示的预览消息（一般是最后一条消息）
+    /// </summary>
     public string PreviewText { get; }
 
+    /// <summary>
+    /// 在对话列表中显示的时间（一般与最后一条消息对应）
+    /// </summary>
     public string PreviewTime { get; }
 
+    /// <summary>
+    /// 创建消息列表
+    /// </summary>
+    /// <param name="id">好友 ID</param>
+    /// <param name="name">用户名</param>
+    /// <param name="description">简介</param>
+    /// <returns></returns>
     private static IReadOnlyList<ChatMessageViewModel> CreateMessages(int id, string name, string description)
     {
         return id switch
@@ -99,7 +124,7 @@ public class ChatContactViewModel
                 new("14:07", "沿着南边那条干燥的小径走就没问题，我已经探过路了", false),
                 new("14:10", "收到，我会慢慢走过去", true)
             ],
-            _ => CreateFallbackMessages(name, description)
+            _ => CreateFallbackMessages(name, description) // 示例消息兜底
         };
     }
 

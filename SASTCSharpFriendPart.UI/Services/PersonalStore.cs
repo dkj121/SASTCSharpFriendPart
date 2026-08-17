@@ -70,8 +70,8 @@ public partial class PersonalStore : ObservableObject
             var profile = JsonSerializer.Deserialize<PersonalProfile>(File.ReadAllText(DataPath));
             if (profile is not null)
             {
-                Name = profile.Name ?? string.Empty;
-                Description = profile.Description ?? string.Empty;
+                Name = profile.Name;
+                Description = profile.Description;
             }
 
             ErrorMessage = string.Empty;
