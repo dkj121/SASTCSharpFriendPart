@@ -6,11 +6,11 @@ using SASTCSharpFriendPart_UI.ViewModels;
 namespace SASTCSharpFriendPart_UI.Views;
 
 /// <summary>
-/// FriendPage 类是一个页面类，负责显示好友相关的界面，并在加载时播放入口动画。
+/// Displays the chat interface and plays its entrance animation when loaded.
 /// </summary>
 public sealed partial class ChatPage : Page
 {
-    public FriendViewModel ViewModel { get; } = new();
+    public ChatViewModel ViewModel { get; } = new();
 
     public ChatPage()
     {
@@ -19,7 +19,7 @@ public sealed partial class ChatPage : Page
     }
 
     /// <summary>
-    /// OnLoaded 方法在页面加载完成后触发，负责启动入口动画。
+    /// Starts the entrance animation after the page is ready.
     /// </summary>
     /// <param name="sender">触发事件的控件</param>
     /// <param name="e">事件参数</param>

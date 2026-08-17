@@ -107,7 +107,7 @@
                     </StackPanel>
 
                     <Button x:Name="SettingsButton"
-                            Content="⚙️ Settings"
+                            Content="⚙️ 设置"
                             Grid.Row="2"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Left"
