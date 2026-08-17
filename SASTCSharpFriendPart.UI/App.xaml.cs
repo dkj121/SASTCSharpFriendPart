@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 
 using SASTCSharpFriendPart_UI.Views;
+using SASTCSharpFriendPart_UI.Services;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -22,6 +23,11 @@ public partial class App : Application
     /// the window reference (for dialogs, pickers, interop, etc.).
     /// </summary>
     public static Window Window { get; private set; } = null!;
+
+    /// <summary>
+    /// Shared source of friend data for all pages and view models.
+    /// </summary>
+    public static FriendStore FriendStore { get; } = new();
 
     /// <summary>
     /// The UI thread dispatcher. Use <c>App.DispatcherQueue</c> to marshal calls

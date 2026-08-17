@@ -5,10 +5,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 
-using SASTCSharpFriendPart.Core.Models;
+using SASTCSharpFriendPart_UI.Services;
 
 using System.Collections.ObjectModel;
-using System.Text.Json;
 
 namespace SASTCSharpFriendPart_UI.ViewModels;
 
@@ -17,16 +16,8 @@ namespace SASTCSharpFriendPart_UI.ViewModels;
 /// </summary>
 public partial class FriendViewModel : ObservableObject
 {
-    /// <summary>
-    /// _friends 字段是一个私有的 List，用于存储所有朋友的详细信息，包括名称、描述和图片路径。
-    /// </summary>
-    private List<FriendDto> _friends = new();
-
     [ObservableProperty]
-    private ObservableCollection<string> friendNames = new();
-
-    [ObservableProperty]
-    private string selectedFriendName = string.Empty;
+    private FriendItemViewModel? selectedFriend;
 
     [ObservableProperty]
     private string friendName = string.Empty;
@@ -40,10 +31,16 @@ public partial class FriendViewModel : ObservableObject
     [ObservableProperty]
     private bool isEditing;
 
+    private readonly FriendStore _friendStore;
+
+    public ObservableCollection<FriendItemViewModel> Friends => _friendStore.Friends;
+
+    public string ErrorMessage => _friendStore.ErrorMessage;
+
     public bool IsNotEditing => !IsEditing;
 
     public Visibility EditButtonVisible =>
-        !string.IsNullOrEmpty(SelectedFriendName) && !IsEditing
+        SelectedFriend is not null && !IsEditing
             ? Visibility.Visible : Visibility.Collapsed;
 
     public Visibility SaveButtonVisible =>
@@ -59,54 +56,36 @@ public partial class FriendViewModel : ObservableObject
         }
     }
 
-    /// <summary>
-    /// FriendViewModel 构造函数用于初始化 FriendViewModel 实例，并加载朋友数据，从 JSON 文件中读取朋友信息并填充到 ViewModel 中。
-    /// </summary>
     public FriendViewModel()
+        : this(App.FriendStore)
     {
-        LoadFriends();
+    }
+
+    public FriendViewModel(FriendStore friendStore)
+    {
+        _friendStore = friendStore;
+        _friendStore.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(FriendStore.ErrorMessage))
+            {
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        };
+        SelectedFriend = Friends.FirstOrDefault();
     }
 
     /// <summary>
-    /// LoadFriends 方法用于从指定的 JSON 文件中加载朋友数据，并将其存储在 _friends 列表中，同时更新 FriendNames 集合以供 UI 绑定使用。
-    /// </summary>
-    private void LoadFriends()
-    {
-        try
-        {
-            string jsonPath = Path.Combine(AppContext.BaseDirectory, "Data", "data.json");
-            if (!File.Exists(jsonPath)) return;
-
-            string jsonData = File.ReadAllText(jsonPath);
-            _friends = JsonSerializer.Deserialize<List<FriendDto>>(jsonData) ?? new();
-
-            FriendNames.Clear();
-            foreach (var f in _friends) FriendNames.Add(f.Name);
-
-            if (FriendNames.Count > 0)
-                SelectedFriendName = FriendNames[0];
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine($"Error loading friends: {ex.Message}");
-        }
-    }
-
-    /// <summary>
-    /// OnSelectedFriendNameChanged 方法在 SelectedFriendName 属性更改时触发，用于更新当前选中朋友的详细信息，包括名称、描述和图片路径，同时设置编辑状态为 false。
+    /// OnSelectedFriendChanged 方法在选择的好友变更时，用其数据初始化编辑草稿。
     /// </summary>
     /// <param name="value">新的朋友名称</param>
-    partial void OnSelectedFriendNameChanged(string value)
+    partial void OnSelectedFriendChanged(FriendItemViewModel? value)
     {
-        if (string.IsNullOrEmpty(value)) return;
+        if (value is null) return;
 
-        var friend = _friends.FirstOrDefault(f => f.Name == value);
-        if (friend == null) return;
-
-        FriendName = friend.Name;
-        FriendDescription = friend.Description;
+        FriendName = value.Name;
+        FriendDescription = value.Description;
         IsEditing = false;
-        ImagePath = friend.ImgUrl;
+        ImagePath = value.ImgUrl;
 
         OnPropertyChanged(nameof(EditButtonVisible));
     }
@@ -146,39 +125,18 @@ public partial class FriendViewModel : ObservableObject
     [RelayCommand]
     private void Save()
     {
-        var friend = _friends.FirstOrDefault(f => f.Name == SelectedFriendName);
-        if (friend != null)
+        if (SelectedFriend is null)
         {
-            friend.Name = FriendName;
-            friend.Description = FriendDescription;
+            return;
         }
 
-        WriteFriendsToJson();
+        SelectedFriend.Name = FriendName;
+        SelectedFriend.Description = FriendDescription;
+        ImagePath = SelectedFriend.ImgUrl;
 
-        if (FriendName != SelectedFriendName)
+        if (_friendStore.Save())
         {
-            var idx = FriendNames.IndexOf(SelectedFriendName);
-            FriendNames[idx] = FriendName;
-            SelectedFriendName = FriendName;
-        }
-
-        IsEditing = false;
-    }
-
-    /// <summary>
-    /// WriteFriendsToJson 方法用于将当前 _friends 列表中的朋友信息序列化为 JSON 格式，并写入到指定的 JSON 文件中，以便在应用程序重新启动时能够加载最新的朋友数据。
-    /// </summary>
-    private void WriteFriendsToJson()
-    {
-        try
-        {
-            string jsonPath = Path.Combine(AppContext.BaseDirectory, "Data", "data.json");
-            var json = JsonSerializer.Serialize(_friends, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(jsonPath, json);
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine($"Error saving friends: {ex.Message}");
+            IsEditing = false;
         }
     }
 }
