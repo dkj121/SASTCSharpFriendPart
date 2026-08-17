@@ -82,6 +82,28 @@
                                 CornerRadius="4"
                                 Command="{x:Bind ViewModel.NavigateCommand}"
                                 CommandParameter="FriendPage"/>
+                        <Button x:Name="ChatButton"
+                                Content="💬 聊天"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Padding="20,15"
+                                Margin="0,4"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CornerRadius="4"
+                                Command="{x:Bind ViewModel.NavigateCommand}"
+                                CommandParameter="ChatPage"/>
+                        <Button x:Name="PersonalButton"
+                                Content="😺 咱的信息"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Padding="20,15"
+                                Margin="0,4"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CornerRadius="4"
+                                Command="{x:Bind ViewModel.NavigateCommand}"
+                                CommandParameter="PersonalPage"/>
                     </StackPanel>
 
                     <Button x:Name="SettingsButton"
