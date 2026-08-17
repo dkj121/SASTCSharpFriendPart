@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -6,8 +8,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 using SASTCSharpFriendPart_UI.Services;
-
-using System.Collections.ObjectModel;
 
 namespace SASTCSharpFriendPart_UI.ViewModels;
 

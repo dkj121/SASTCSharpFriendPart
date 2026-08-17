@@ -1,10 +1,10 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 
 using SASTCSharpFriendPart_UI.ViewModels;
-
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace SASTCSharpFriendPart_UI.Views;
 

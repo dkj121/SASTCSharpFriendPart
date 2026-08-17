@@ -1,8 +1,8 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace SASTCSharpFriendPart_UI.ViewModels;
 

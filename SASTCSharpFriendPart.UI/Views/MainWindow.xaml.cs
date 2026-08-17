@@ -1,3 +1,4 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -45,8 +46,8 @@ public sealed partial class MainWindow : Window
     public void UpdateNavigationVisuals()
     {
         var textColor = ThemeService.IsAcrylicMode
-            ? Microsoft.UI.Colors.White
-            : (ThemeService.IsDarkTheme() ? Microsoft.UI.Colors.White : Microsoft.UI.Colors.Black);
+            ? Colors.White
+            : (ThemeService.IsDarkTheme() ? Colors.White : Colors.Black);
 
         TitleTextBlock.Foreground = new SolidColorBrush(textColor);
     }

@@ -1,6 +1,6 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-
 using System.Text.Json;
+
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SASTCSharpFriendPart_UI.Services;
 

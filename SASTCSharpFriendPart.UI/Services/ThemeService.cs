@@ -1,6 +1,8 @@
-using Microsoft.UI.Xaml;
-
+using System.Diagnostics;
 using System.Text.Json;
+
+using Microsoft.UI.Xaml;
+using Microsoft.Win32;
 
 namespace SASTCSharpFriendPart_UI.Services;
 
@@ -156,7 +158,7 @@ public static class ThemeService
         {
             if (OperatingSystem.IsWindows())
             {
-                var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(
+                var key = Registry.CurrentUser.OpenSubKey(
                     @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
                 var value = key?.GetValue("AppsUseLightTheme");
                 return value is int intValue && intValue == 0;
@@ -215,7 +217,7 @@ public static class ThemeService
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Save setting failed: {ex.Message}");
+            Debug.WriteLine($"Save setting failed: {ex.Message}");
         }
     }
 
@@ -263,7 +265,7 @@ public static class ThemeService
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Load settings failed: {ex.Message}");
+            Debug.WriteLine($"Load settings failed: {ex.Message}");
             return null;
         }
     }

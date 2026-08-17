@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 using Microsoft.UI.Xaml.Controls;
 
 namespace SASTCSharpFriendPart_UI.Services;
@@ -27,7 +29,7 @@ public static class NavigationService
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Navigation error: {ex.Message}");
+            Debug.WriteLine($"Navigation error: {ex.Message}");
         }
     }
 

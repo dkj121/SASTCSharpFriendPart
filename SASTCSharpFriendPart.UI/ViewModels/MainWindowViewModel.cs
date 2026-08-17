@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using SASTCSharpFriendPart_UI.Services;
+using SASTCSharpFriendPart_UI.Views;
 
 namespace SASTCSharpFriendPart_UI.ViewModels;
 
@@ -24,11 +25,11 @@ public partial class MainWindowViewModel : ObservableObject
         {
             var pageType = pageName switch
             {
-                "WelcomePage" => typeof(Views.WelcomePage),
-                "FriendPage" => typeof(Views.FriendPage),
-                "ChatPage" => typeof(Views.ChatPage),
-                "PersonalPage" => typeof(Views.PersonalPage),
-                "SettingsPage" => typeof(Views.SettingsPage),
+                "WelcomePage" => typeof(WelcomePage),
+                "FriendPage" => typeof(FriendPage),
+                "ChatPage" => typeof(ChatPage),
+                "PersonalPage" => typeof(PersonalPage),
+                "SettingsPage" => typeof(SettingsPage),
                 _ => null
             };
             if (pageType != null)

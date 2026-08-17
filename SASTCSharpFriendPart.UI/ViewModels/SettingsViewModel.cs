@@ -1,11 +1,12 @@
+using System.Collections.ObjectModel;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-using SASTCSharpFriendPart_UI.Services;
-
-using System.Collections.ObjectModel;
-
 using Microsoft.UI.Xaml;
+
+using SASTCSharpFriendPart_UI.Services;
+using SASTCSharpFriendPart_UI.Views;
 
 namespace SASTCSharpFriendPart_UI.ViewModels;
 
@@ -43,7 +44,7 @@ public partial class SettingsViewModel : ObservableObject
         _initializing = false;
 
         HelpCommand = new RelayCommand(() =>
-            NavigationService.Navigate(typeof(Views.MoreInfoPage)));
+            NavigationService.Navigate(typeof(MoreInfoPage)));
     }
 
     /// <summary>
