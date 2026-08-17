@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
 
 using SASTCSharpFriendPart_UI.Services;
 using SASTCSharpFriendPart_UI.ViewModels;
@@ -13,6 +14,8 @@ namespace SASTCSharpFriendPart_UI.Views;
 public sealed partial class MainWindow : Window
 {
     public MainWindowViewModel ViewModel { get; } = new();
+
+    private bool _isUpdatingNavigationSelection;
 
     public MainWindow()
     {
@@ -29,7 +32,7 @@ public sealed partial class MainWindow : Window
 
         // 初始化主题服务，并设置主题更改时的回调函数
         ThemeService.AppWindow = this;
-        ThemeService.OnThemeChanged = UpdateNavigationButtonsColor;
+        ThemeService.OnThemeChanged = UpdateNavigationVisuals;
         ThemeService.Initialize();
 
         // 导航到欢迎页面
@@ -37,18 +40,35 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 更新导航按钮的颜色，根据当前主题（暗色模式或亮色模式）调整按钮的前景色。
+    /// 更新标题栏文字颜色。NavigationView 的颜色由 WinUI 主题资源自动管理。
     /// </summary>
-    public void UpdateNavigationButtonsColor()
+    public void UpdateNavigationVisuals()
     {
         var textColor = ThemeService.IsAcrylicMode
             ? Microsoft.UI.Colors.White
             : (ThemeService.IsDarkTheme() ? Microsoft.UI.Colors.White : Microsoft.UI.Colors.Black);
 
-        var brush = new SolidColorBrush(textColor);
-        WelcomeButton.Foreground = brush;
-        FriendButton.Foreground = brush;
-        SettingsButton.Foreground = brush;
-        TitleTextBlock.Foreground = brush;
+        TitleTextBlock.Foreground = new SolidColorBrush(textColor);
+    }
+
+    private void MainNavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+    {
+        if (_isUpdatingNavigationSelection || args.SelectedItem is not NavigationViewItem { Tag: string pageName })
+            return;
+
+        ViewModel.NavigateCommand.Execute(pageName);
+    }
+
+    private void RootFrame_Navigated(object sender, NavigationEventArgs e)
+    {
+        var pageName = e.SourcePageType.Name;
+        var selectedItem = MainNavigationView.MenuItems
+            .Concat(MainNavigationView.FooterMenuItems)
+            .OfType<NavigationViewItem>()
+            .FirstOrDefault(item => item.Tag is string tag && tag == pageName);
+
+        _isUpdatingNavigationSelection = true;
+        MainNavigationView.SelectedItem = selectedItem;
+        _isUpdatingNavigationSelection = false;
     }
 }

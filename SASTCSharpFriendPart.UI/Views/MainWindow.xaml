@@ -41,89 +41,49 @@
         </Grid>
 
         <!-- 内容区域 -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- 左侧面板 -->
-            <Border Grid.Column="0"
-                    BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
-                    BorderThickness="0,0,1,0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Grid.Row="0"
-                                Margin="5">
-                        <Button x:Name="WelcomeButton"
-                                Content="🎉 欢迎！"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Left"
-                                Padding="20,15"
-                                Margin="0,4"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                CornerRadius="4"
-                                Command="{x:Bind ViewModel.NavigateCommand}"
-                                CommandParameter="WelcomePage"/>
-                        <Button x:Name="FriendButton"
-                                Content="🦊 动物朋友"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Left"
-                                Padding="20,15"
-                                Margin="0,4"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                CornerRadius="4"
-                                Command="{x:Bind ViewModel.NavigateCommand}"
-                                CommandParameter="FriendPage"/>
-                        <Button x:Name="ChatButton"
-                                Content="💬 聊天"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Left"
-                                Padding="20,15"
-                                Margin="0,4"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                CornerRadius="4"
-                                Command="{x:Bind ViewModel.NavigateCommand}"
-                                CommandParameter="ChatPage"/>
-                        <Button x:Name="PersonalButton"
-                                Content="😺 个人信息"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Left"
-                                Padding="20,15"
-                                Margin="0,4"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                CornerRadius="4"
-                                Command="{x:Bind ViewModel.NavigateCommand}"
-                                CommandParameter="PersonalPage"/>
-                    </StackPanel>
-
-                    <Button x:Name="SettingsButton"
-                            Content="⚙️ 设置"
-                            Grid.Row="2"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Left"
-                            Padding="20,15"
-                            Margin="5,5,5,10"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            CornerRadius="4"
-                            Command="{x:Bind ViewModel.NavigateCommand}"
-                            CommandParameter="SettingsPage"/>
-                </Grid>
-            </Border>
-
-            <!-- 内容框架 -->
+        <NavigationView x:Name="MainNavigationView"
+                        Grid.Row="1"
+                        IsBackButtonVisible="Collapsed"
+                        IsSettingsVisible="False"
+                        OpenPaneLength="200"
+                        PaneDisplayMode="Left"
+                        SelectionChanged="MainNavigationView_SelectionChanged">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="欢迎！"
+                                    Tag="WelcomePage">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Home"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="动物朋友"
+                                    Tag="FriendPage">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="People"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="聊天"
+                                    Tag="ChatPage">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Message"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="个人信息"
+                                    Tag="PersonalPage">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Contact"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="设置"
+                                    Tag="SettingsPage">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Setting"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.FooterMenuItems>
             <Frame x:Name="RootFrame"
-                   Grid.Column="1"/>
-        </Grid>
+                   Navigated="RootFrame_Navigated"/>
+        </NavigationView>
     </Grid>
 </Window>
