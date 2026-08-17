@@ -6,11 +6,11 @@ using SASTCSharpFriendPart_UI.ViewModels;
 namespace SASTCSharpFriendPart_UI.Views;
 
 /// <summary>
-/// FriendPage 类是一个页面类，负责显示好友相关的界面，并在加载时播放入口动画。
+/// 个人信息页面，负责显示和编辑当前用户的本地个人资料。
 /// </summary>
 public sealed partial class PersonalPage : Page
 {
-    public FriendViewModel ViewModel { get; } = new();
+    public PersonalViewModel ViewModel { get; } = new();
 
     public PersonalPage()
     {
@@ -19,7 +19,7 @@ public sealed partial class PersonalPage : Page
     }
 
     /// <summary>
-    /// OnLoaded 方法在页面加载完成后触发，负责启动入口动画。
+    /// 页面加载完成后播放入口动画。
     /// </summary>
     /// <param name="sender">触发事件的控件</param>
     /// <param name="e">事件参数</param>

@@ -30,6 +30,11 @@ public partial class App : Application
     public static FriendStore FriendStore { get; } = new();
 
     /// <summary>
+    /// Shared source of the current user's locally persisted profile.
+    /// </summary>
+    public static PersonalStore PersonalStore { get; } = new();
+
+    /// <summary>
     /// The UI thread dispatcher. Use <c>App.DispatcherQueue</c> to marshal calls
     /// to the UI thread. Fully qualified to avoid CS0104 ambiguity with
     /// <see cref="Windows.System.DispatcherQueue"/>.

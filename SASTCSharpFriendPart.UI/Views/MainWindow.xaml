@@ -94,7 +94,7 @@
                                 Command="{x:Bind ViewModel.NavigateCommand}"
                                 CommandParameter="ChatPage"/>
                         <Button x:Name="PersonalButton"
-                                Content="😺 咱的信息"
+                                Content="😺 个人信息"
                                 HorizontalAlignment="Stretch"
                                 HorizontalContentAlignment="Left"
                                 Padding="20,15"
