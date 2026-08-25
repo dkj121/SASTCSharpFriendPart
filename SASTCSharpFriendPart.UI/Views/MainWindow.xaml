@@ -82,6 +82,17 @@
                                 CornerRadius="4"
                                 Command="{x:Bind ViewModel.NavigateCommand}"
                                 CommandParameter="FriendPage"/>
+                        <Button x:Name="PlaygroundButton"
+                                Content="🎡 动物广场"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                Padding="20,15"
+                                Margin="0,4"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CornerRadius="4"
+                                Command="{x:Bind ViewModel.NavigateCommand}"
+                                CommandParameter="PlaygroundPage"/>
                     </StackPanel>
 
                     <Button x:Name="SettingsButton"

@@ -27,6 +27,7 @@ public partial class MainWindowViewModel : ObservableObject
                 "WelcomePage" => typeof(Views.WelcomePage),
                 "FriendPage" => typeof(Views.FriendPage),
                 "SettingsPage" => typeof(Views.SettingsPage),
+                "PlaygroundPage" => typeof(Views.PlaygroundPage),
                 _ => null
             };
             if (pageType != null)

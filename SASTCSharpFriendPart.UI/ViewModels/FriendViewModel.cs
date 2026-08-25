@@ -20,7 +20,7 @@ public partial class FriendViewModel : ObservableObject
     /// <summary>
     /// _friends 字段是一个私有的 List，用于存储所有朋友的详细信息，包括名称、描述和图片路径。
     /// </summary>
-    private List<FriendDto> _friends = new();
+    private List<Friend> _friends = new();
 
     [ObservableProperty]
     private ObservableCollection<string> friendNames = new();
@@ -78,10 +78,14 @@ public partial class FriendViewModel : ObservableObject
             if (!File.Exists(jsonPath)) return;
 
             string jsonData = File.ReadAllText(jsonPath);
-            _friends = JsonSerializer.Deserialize<List<FriendDto>>(jsonData) ?? new();
+            _friends = JsonSerializer.Deserialize<List<Friend>>(jsonData) ?? new();
 
             FriendNames.Clear();
-            foreach (var f in _friends) FriendNames.Add(f.Name);
+            foreach (var f in _friends) 
+            {
+                System.Console.WriteLine(f.Name);
+                FriendNames.Add(f.Name);
+            }
 
             if (FriendNames.Count > 0)
                 SelectedFriendName = FriendNames[0];
